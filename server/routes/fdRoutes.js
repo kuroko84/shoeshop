@@ -1,0 +1,308 @@
+const express = require('express');
+const router = express.Router();
+const fdController = require('../controllers/fdController');
+const checkLogin = require('../utils/checkLogin');
+const cloudinary = require('../utils/cloudinary');
+const upload = require('../utils/multer');
+
+router.get('/', fdController.homepage);
+router.get('/login', fdController.login);
+router.post('/login', fdController.loginOnPost);
+router.get('/register', fdController.register);
+router.post('/register', fdController.registerOnPost);
+router.get('/must-login', fdController.mustLogin);
+router.get('/product/:id', fdController.product);
+
+//Shipper router
+router.get(
+  '/shipper',
+  checkLogin.checkLogin,
+  checkLogin.checkShipper,
+  fdController.shipper
+);
+router.get(
+  '/staff-view-invoice/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkShipper,
+  fdController.staffViewInvoice
+);
+router.get(
+  '/staff-view-delivering-invoice/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkShipper,
+  fdController.staffViewDeliveringInvoice
+);
+router.get(
+  '/finish-dilivering/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkShipper,
+  fdController.staffFinishDilivering
+);
+
+//Admin router
+router.get(
+  '/admin-dashboard',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminDashboard
+);
+router.get(
+  '/admin-boots',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminBoots
+);
+router.get(
+  '/admin-sneakers',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminSneakers
+);
+
+//sneakers
+router.get(
+  '/admin-info',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminInfo
+);
+router.get(
+  '/admin-add-sneakers',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminAddSneakers
+);
+router.post(
+  '/admin-add-sneakers',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  upload.single('image'),
+  fdController.adminAddSneakersOnPost
+);
+router.get(
+  '/admin-update-sneakers/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminUpdateSneakers
+);
+router.post(
+  '/admin-update-sneakers/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  upload.single('image'),
+  fdController.adminUpdateSneakersOnPost
+);
+router.post(
+  '/admin-delete-sneakers/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminDeleteSneakersOnPost
+);
+
+//boots
+router.get(
+  '/admin-add-boots',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminAddBoots
+);
+router.post(
+  '/admin-add-boots',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  upload.single('image'),
+  fdController.adminAddBootsOnPost
+);
+router.get(
+  '/admin-update-boots/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminUpdateBoots
+);
+router.post(
+  '/admin-update-boots/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  upload.single('image'),
+  fdController.adminUpdateBootsOnPost
+);
+router.post(
+  '/admin-delete-boots/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminDeleteBootsOnPost
+);
+router.get(
+  '/admin-show-staff-list',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminShowStaffList
+);
+router.get(
+  '/admin-add-staff',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminAddStaff
+);
+router.post(
+  '/admin-add-staff',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminAddStaffOnPost
+);
+router.get(
+  '/admin-today-invoices',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminViewTodayInvoices
+);
+router.get(
+  '/admin-all-invoices',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminViewAllInvoices
+);
+router.get(
+  '/admin-ordered-invoices',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminViewOrderedInvoices
+);
+router.get(
+  '/admin-confirmed-invoices',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminViewConfirmedInvoices
+);
+router.get(
+  '/admin-got-invoices',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminViewGotItemsInvoices
+);
+router.get(
+  '/admin-done-invoices',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminViewDoneInvoices
+);
+router.get(
+  '/admin-canceled-invoices',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminViewCanceledInvoices
+);
+router.get(
+  '/admin-view-invoice/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminViewInvoice
+);
+router.get(
+  '/admin-delete-canceled-invoices',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminDeleteCanceledInvoice
+);
+router.post(
+  '/admin-arrange-staff/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminArangeStaffOnPost
+);
+router.get(
+  '/admin-confirm-invoice/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkAdmin,
+  fdController.adminConfirmInvoice
+);
+
+//Client router
+router.get(
+  '/client',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.client
+);
+router.get(
+  '/info',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.clientInfo
+);
+router.get(
+  '/client-product/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.clientProduct
+);
+router.get(
+  '/cart',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.clientCart
+);
+router.get(
+  '/sneakers',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.clientSneakers
+);
+router.get(
+  '/boots',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.clientBoots
+);
+router.get(
+  '/all',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.clientAllProduct
+);
+router.post(
+  '/add-cart/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.addCartOnPost
+);
+router.post(
+  '/update-cart/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.updateCartOnPost
+);
+router.get(
+  '/remove-cart/:id/:cid',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.removeItemCart
+);
+router.get(
+  '/create-invoice/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.createInvoice
+);
+router.post(
+  '/create-invoice',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.createInvoiceOnPost
+);
+router.get(
+  '/invoice/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.invoice
+);
+router.get(
+  '/cancel/:id',
+  checkLogin.checkLogin,
+  checkLogin.checkClient,
+  fdController.cancelOrder
+);
+
+// router.get('/buy', fdController.buyOne);
+// router.post('/create-invoice', fdController.createInvoiceSingle);
+module.exports = router;

@@ -1,0 +1,92 @@
+<div class="container-scroller">
+  <!-- slider quảng cáo -->
+  <section class="home" id="home">
+    <div class="image" data-aos="fade-down">
+      <img
+        src="https://th.bing.com/th/id/OIP.pc7ULvMFld0nEOJ2yUTE-gHaEu?pid=ImgDet&rs=1"
+        alt=""
+      />
+    </div>
+    <div class="content" data-aos="fade-up">
+      <h3>Most Awesome Sneaker For You</h3>
+      <p>
+        Our shoe store is sure to bring you the best experience, along with smoothness, comfort as well as a great style when using our products!!!
+      </p>
+      <a href="/must-login" class="btn btn-block btn-warning btn-lg text-white"
+        ><h2 class="text-white">Explore now</h2></a
+      >
+    </div>
+  </section>
+  <!-- home section ends -->
+  <hr />
+  <!-- sneakers section starts  -->
+  <section class="packages" id="sneakers">
+    <a href="/sneakers" title="Click fore more sneakers"
+      ><h1 class="heading text-warning" ><span style="font-weight:900;">sneakers</span></h1></a
+    >
+    <div class="box-container">
+      <div class="row">
+        <% if ( sneakers != '') { %> <% sneakers.forEach(function(acsneakers, index){ %>
+        <a href="/product/<%= acsneakers._id %>">
+          <div class="col-md-3 category__link">
+            <div class="box" data-aos="fade-up">
+              <div class="image">
+                <img src=" <%= acsneakers.image_url %> " alt="<%= acsneakers.name %>" />
+                <h3 style="margin-right: 15px;"><i class="fa-solid fa-shoe-prints"></i><%= acsneakers.name %></h3>
+              </div>
+              <div class="content">
+                <div class="price"><%= acsneakers.price %></div>
+                <p style=" display: -webkit-box;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1"><%= acsneakers.description %></p>
+                <a href="/must-login" class="btn btn-block btn-warning btn-lg text-white"
+                  ><h4>Order now</h4></a
+                >
+              </div>
+            </div>
+          </div>
+        </a>
+        <% }) %> <% } %>
+      </div>
+    </div>
+  </section>
+  <!-- sneakers section ends -->
+  <hr />
+  <!-- boots section starts  -->
+  <section class="packages" id="boots">
+    <a href="/boots" title="Click fore more boots"
+      ><h1 class="heading text-warning" ><span style="font-weight:900;">boots</span></h1></a
+    >
+    <div class="box-container">
+      <div class="row">
+        <% if ( boots != '') { %> <% boots.forEach(function(acboots, index){ %>
+        <a href="/product/<%= acboots._id %>"
+          ><div class="col-md-3 category__link">
+            <div class="box" data-aos="fade-up">
+              <div class="image">
+                <img src=" <%= acboots.image_url %> " alt="<%= acboots.name %> " />
+                <h3 style="margin-right: 15px;"><i class="fa-solid fa-shoe-prints"></i><%= acboots.name %></h3>
+              </div>
+              <div class="content">
+                <div class="price"><%= acboots.price %></div>
+                <p style=" display: -webkit-box;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1"><%= acboots.description %></p>
+                <a href="/must-login" class="btn btn-block btn-warning btn-lg text-white"
+                  ><h4>Order now</h4></a
+                >
+              </div>
+            </div>
+          </div></a
+        >
+        <% }) %> <% } %>
+      </div>
+    </div>
+  </section>
+  <!-- boots section ends -->
+  <!-- page-body-wrapper ends -->
+</div>
